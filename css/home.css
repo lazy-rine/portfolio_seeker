@@ -1,0 +1,489 @@
+/* ヘッダ */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header-height);
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    justify-content: space-between;
+}
+
+header p {
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.header-online {
+    margin-left: auto;
+}
+
+.header-online-p::before {
+    content: "●";
+    padding-right: 5px;
+    color: var(--accent-green);
+    text-shadow: 0 0 6px var(--accent-green);
+}
+
+/* PC */
+@media (min-width: 768px) {
+    header {
+        justify-content: space-between;
+    }
+
+    .header-left {
+        flex: initial;
+        justify-content: flex-start;
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex: initial;
+        justify-content: flex-start;
+    }
+}
+/* ホームの main レイアウト(terminal-area / side-area) */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+}
+
+.terminal-area,
+.side-area {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    main {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .terminal-area {
+        flex: 1;
+    }
+
+    .terminal-area .panel {
+        height: 100%;
+    }
+
+    .side-area {
+        width: 300px;
+        flex-shrink: 0;
+    }
+}
+/* ========== パネル共通 ========== */
+.panel {
+    padding: 16px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-dim);
+}
+
+.panel-title {
+    border-bottom: 1px solid var(--border-dim);
+    color: var(--accent-cyan);
+    padding-bottom: 14px;
+}
+
+/* ========== profile ========== */
+.profile-content {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 4px 16px;
+    margin-top: 8px;
+}
+
+.profile-content dt {
+    color: var(--text-muted);
+}
+
+.profile-content dd {
+    color: var(--text-primary);
+    text-align: right;
+}
+
+.profile-content .amber {
+    color: var(--accent-amber);
+}
+
+.open-button {
+    color: var(--accent-cyan);
+    display: inline-block;
+    margin-top: 12px;
+    text-decoration: none;
+}
+
+.open-button:hover {
+    text-decoration: underline;
+}
+
+/* ========== featured ========== */
+.featured-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.featured-item {
+    border-radius: 2px;
+}
+
+/* 行: クリックで開閉。画像の下にタイトル */
+.featured-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 2px;
+    text-align: left;
+    color: inherit;
+}
+
+.featured-row:hover {
+    background: var(--bg-active);
+}
+
+.featured-thumb {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid var(--border-dim);
+    border-radius: 2px;
+}
+
+/* 三角 + タイトル + メタ */
+.featured-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ▷ / ▽ */
+.featured-toggle {
+    width: 12px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+}
+
+.featured-toggle::before {
+    content: "▷";
+}
+
+.featured-item.open .featured-toggle::before {
+    content: "▽";
+}
+
+.featured-item.open .featured-toggle {
+    color: var(--accent-cyan);
+}
+
+.featured-title {
+    flex: 1;
+    color: var(--text-primary);
+}
+
+.featured-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.featured-badge {
+    font-size: 11px;
+    padding: 0 7px;
+    border: 1px solid var(--accent-amber);
+    color: var(--accent-amber);
+    border-radius: 2px;
+}
+
+/* 開いたとき max-height で展開 */
+.featured-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.featured-item.open {
+    background: var(--bg-active);
+}
+
+.featured-item.open .featured-detail {
+    max-height: 500px;
+}
+
+.featured-desc {
+    color: var(--text-body);
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 0 8px 10px;
+}
+
+.featured-open {
+    display: inline-block;
+    color: var(--accent-cyan);
+    font-size: 12px;
+    padding: 10px 14px;
+    margin: 0 8px 10px;
+    border: 1px solid var(--border-dim);
+    background: var(--bg-surface);
+    border-radius: 2px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.featured-seeall {
+    display: block;
+    text-align: right;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    padding-right: 6px;
+    text-decoration: none;
+}
+
+/* ========== contacts ========== */
+.contacts-content li {
+    color: var(--text-muted);
+}
+/* ========== boot パネル ========== */
+/* 上からの淡いシアンで奥行きを出す。
+   縦 flex にして、中身(#command)が余りの高さを取れるようにする。 */
+.panel.boot {
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(
+            130% 90% at 50% 0%,
+            rgba(78, 201, 255, 0.06),
+            transparent 55%
+        ),
+        var(--bg-surface);
+}
+
+/* ========== プログレスバー ========== */
+/* cyan のブロックが 0 → 100% に伸びる */
+.boot-bar {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* 下地(暗いブロック) */
+.boot-bar::before {
+    content: "████████████";
+    color: var(--border-dim);
+    opacity: 0.4;
+}
+
+.boot-bar::after {
+    content: "████████████";
+    color: var(--accent-cyan);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: boot-bar-fill 1s steps(12) 0.4s both;
+}
+
+@keyframes boot-bar-fill {
+    to {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .boot-bar::after {
+        animation: none;
+        width: 100%;
+    }
+}
+
+/* ========== 中身 ========== */
+/* パネルの余り高さを埋め、溢れた分は隠す。古い行は JS(trimScrollback)が消す。 */
+.boot-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    margin-top: 8px;
+    gap: 8px;
+}
+
+.boot-content-primary {
+    color: var(--text-primary);
+}
+
+.boot-content-muted {
+    color: var(--text-muted);
+}
+
+.boot-content .prompt {
+    color: var(--accent-cyan);
+    text-shadow: 0 0 8px currentColor;
+}
+
+.boot-content .ok {
+    color: var(--accent-green);
+}
+
+.boot-content .amber {
+    color: var(--accent-amber);
+}
+
+.hero {
+    color: var(--accent-cyan);
+    font-size: 32px;
+    text-shadow: 0 0 12px currentColor;
+}
+
+.terminal-input-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    caret-color: var(--accent-cyan);
+}
+
+.entered {
+    color: var(--text-primary);
+}
+
+/* ===== スマホ: 直接入力させず、点滅カーソルだけ出す ===== */
+@media (max-width: 767px) {
+    /* タップでキーボードを出さない */
+    .terminal-input {
+        pointer-events: none;
+    }
+
+    /* タイプ中は $ 直後の固定カーソルを止める(末尾カーソルと二重になる) */
+    .boot-content p.typing .prompt::after {
+        content: none;
+    }
+
+    /* タイプ中の文字列。末尾にカーソルを追従させる */
+    .terminal-typed {
+        color: var(--text-primary);
+    }
+
+    .terminal-typed::after {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 1em;
+        margin-left: 2px;
+        background: var(--accent-cyan);
+        vertical-align: text-bottom;
+        animation: terminal-cursor-blink 1.1s step-end infinite;
+    }
+}
+
+@keyframes terminal-cursor-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ========== 行の順次表示 ========== */
+/* boot 行だけ --i 順に遅延表示。コマンド後に増える行には付かない */
+.boot-line {
+    animation: boot-line-in 0.3s ease both;
+    animation-delay: calc(var(--i, 0) * 0.1s);
+}
+
+@keyframes boot-line-in {
+    from {
+        opacity: 0;
+        transform: translateY(3px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .boot-line {
+        animation: none;
+    }
+}
+/* フッタ */
+footer {
+    display: flex;
+    align-items: center;
+    height: var(--footer-height);
+    padding-left: 16px;
+    padding-right: 16px;
+    border-top: 1px solid var(--border-dim);
+}
+
+footer p {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    justify-content: flex-start;
+}
+
+.footer-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-center p {
+    color: var(--text-primary);
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    justify-content: flex-end;
+}
+.footer-right .primary {
+    color: var(--text-primary);
+}
+.footer-right .amber {
+    color: var(--accent-amber);
+}
+@media (min-width: 768px) {
+    footer.pc-only {
+        display: flex;
+    }
+}

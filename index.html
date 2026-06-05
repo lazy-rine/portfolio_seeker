@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="ja" class="pre-login">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- 表示済みタブはオーバーレイを出さず boot を即表示(描画前に判定) -->
+        <script>
+            (function () {
+                try {
+                    if (sessionStorage.getItem("seekerLoginShown")) {
+                        var de = document.documentElement;
+                        de.classList.remove("pre-login");
+                        de.classList.add("login-skip");
+                    }
+                } catch (e) {}
+            })();
+        </script>
+
+        <!-- no-JS フォールバック: boot 表示・オーバーレイ非表示 -->
+        <noscript>
+            <style>
+                html.pre-login #command {
+                    display: block;
+                }
+                #login-screen {
+                    display: none;
+                }
+            </style>
+        </noscript>
+
+        <title>ポートフォリオ</title>
+        <!-- reset_css -->
+        <link rel="stylesheet" href="css/reset.css" />
+        <!-- icon_font -->
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+        <!-- font -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+            rel="stylesheet"
+        />
+        <!-- css -->
+        <!-- 変数 -->
+        <link rel="stylesheet" href="css/variables.css" />
+        <!-- 共通 -->
+        <link rel="stylesheet" href="css/layout.css" />
+        <!-- nav-css -->
+        <link rel="stylesheet" href="css/nav.css" />
+        <!-- home(ヘッダ/メイン/パネル/ターミナル/フッタ) -->
+        <link rel="stylesheet" href="css/home.css" />
+        <!-- windows-css -->
+        <link rel="stylesheet" href="css/windows.css" />
+        <!-- fx-css -->
+        <link rel="stylesheet" href="css/fx.css" />
+        <!-- login-css -->
+        <link rel="stylesheet" href="css/login.css" />
+        <!-- ambient-css -->
+        <link rel="stylesheet" href="css/ambient.css" />
+    </head>
+    <body>
+        <!-- 背景ネットワーク(最背面) -->
+        <canvas id="bg-net" aria-hidden="true"></canvas>
+
+        <!-- 初回ログイン画面。JS がフェードして消す -->
+        <div class="login-screen" id="login-screen">
+            <div class="login-box">
+                <p class="login-line">seeker@portfolio secure shell</p>
+                <p class="login-line">
+                    <span class="login-label">login:</span
+                    ><span class="login-typed" id="login-user"></span>
+                </p>
+                <p class="login-line" id="login-pass-line" hidden>
+                    <span class="login-label">password:</span
+                    ><span class="login-typed" id="login-pass"></span>
+                </p>
+                <p class="login-line" id="login-status" hidden></p>
+            </div>
+        </div>
+
+        <header>
+            <div class="header-left">
+                <div class="header-title">
+                    <p>seeker@portfolio ~/</p>
+                </div>
+                <div class="header-online">
+                    <p class="header-online-p">online</p>
+                </div>
+            </div>
+
+            <div class="header-right pc-only">
+                <div class="header-localip">
+                    <p>192.168.1.12</p>
+                </div>
+                <div class="header-date">
+                    <p>YYYY/MM/DD</p>
+                </div>
+                <div class="header-time">
+                    <p>HH/MM/SS</p>
+                </div>
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                <li>
+                    <button data-action="home">
+                        <span class="material-icons nav-icon">home</span>
+                    </button>
+                </li>
+                <li>
+                    <button data-action="about">
+                        <span class="material-icons nav-icon">person</span>
+                    </button>
+                </li>
+                <li>
+                    <button data-action="projects">
+                        <span class="material-icons nav-icon">folder</span>
+                    </button>
+                </li>
+                <li>
+                    <button data-action="contact">
+                        <span class="material-icons nav-icon">mail</span>
+                    </button>
+                </li>
+                <li class="pc-only">
+                    <button data-action="settings">
+                        <span class="material-icons nav-icon"
+                            >settings_applications</span
+                        >
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="terminal-area">
+                <section class="panel boot">
+                    <p class="panel-title">┌─ /boot/welcome.sh ─────</p>
+                    <div class="boot-content" id="command">
+                        <p
+                            class="boot-content-primary boot-line"
+                            style="--i: 0"
+                        >
+                            <span class="prompt">$</span> ./boot.sh
+                        </p>
+                        <p
+                            class="boot-content-muted pc-only boot-line"
+                            style="--i: 1"
+                        >
+                            [<span class="ok">OK</span>] mounting filesystem...
+                        </p>
+                        <p
+                            class="boot-content-muted pc-only boot-line"
+                            style="--i: 2"
+                        >
+                            [<span class="ok">OK</span>] loading user data...
+                        </p>
+                        <p
+                            class="boot-content-muted pc-only boot-line"
+                            style="--i: 3"
+                        >
+                            [<span class="ok">OK</span>] establishing
+                            connection...
+                        </p>
+                        <p class="boot-content-muted boot-line" style="--i: 4">
+                            [<span class="boot-bar" aria-hidden="true"></span>]
+                            loading...
+                        </p>
+                        <p class="boot-content-muted boot-line" style="--i: 14">
+                            [<span class="ok">OK</span>] system ready
+                        </p>
+
+                        <p class="hero boot-line" style="--i: 15">
+                            > Hello, World.
+                        </p>
+
+                        <p
+                            class="boot-content-primary boot-line"
+                            style="--i: 16"
+                        >
+                            <span class="prompt">></span> welcome to
+                            <span class="amber">seeker</span>'s portfolio.
+                        </p>
+                        <p
+                            class="boot-content-primary pc-only boot-line"
+                            style="--i: 17"
+                        >
+                            <span class="prompt">></span> a web dev / creator
+                            from somewhere on the net.
+                        </p>
+                        <p
+                            class="boot-content-primary pc-only boot-line"
+                            style="--i: 18"
+                        >
+                            <span class="prompt">></span> type 'help' to see
+                            available commands.
+                        </p>
+                        <p class="boot-content-muted boot-line" style="--i: 19">
+                            <span class="prompt entered">$</span>
+                            <input
+                                type="text"
+                                id="terminal-input"
+                                class="terminal-input"
+                                autocomplete="off"
+                                spellcheck="false"
+                                aria-label="コマンド入力"
+                            />
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="side-area">
+                <section class="panel profile" data-panel="about" hidden>
+                    <p class="panel-title">┌─ profile ──────────────</p>
+                    <dl class="profile-content">
+                        <dt>id</dt>
+                        <dd>seeker</dd>
+                        <dt>role</dt>
+                        <dd>web dev / creator</dd>
+                        <dt>status</dt>
+                        <dd class="amber">○ open to work</dd>
+                    </dl>
+                    <a href="#" class="open-button">$ open about.md →</a>
+                </section>
+
+                <section class="panel featured" data-panel="projects" hidden>
+                    <p class="panel-title">┌─ featured ─────────────</p>
+
+                    <ul class="featured-list">
+                        <li class="featured-item">
+                            <button
+                                class="featured-row"
+                                data-featured="portfolio"
+                            >
+                                <img
+                                    src="img/image_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg"
+                                    alt=""
+                                    class="featured-thumb"
+                                />
+                                <span class="featured-info">
+                                    <span class="featured-toggle"></span>
+                                    <span class="featured-title"
+                                        >portfolio.html</span
+                                    >
+                                    <span class="featured-badge">new</span>
+                                </span>
+                            </button>
+                            <div class="featured-detail">
+                                <p class="featured-desc">
+                                    プロジェクトの簡単な説明文。
+                                </p>
+                                <a href="#" class="featured-open"
+                                    >$ open portfolio.html →</a
+                                >
+                            </div>
+                        </li>
+
+                        <li class="featured-item">
+                            <button
+                                class="featured-row"
+                                data-featured="project-02"
+                            >
+                                <img
+                                    src="img/image_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg"
+                                    alt=""
+                                    class="featured-thumb"
+                                />
+                                <span class="featured-info">
+                                    <span class="featured-toggle"></span>
+                                    <span class="featured-title"
+                                        >project_02.md</span
+                                    >
+                                    <span class="featured-meta">'25</span>
+                                </span>
+                            </button>
+                            <div class="featured-detail">
+                                <p class="featured-desc">
+                                    プロジェクトの簡単な説明文。
+                                </p>
+                                <a href="#" class="featured-open"
+                                    >$ open project_02.md →</a
+                                >
+                            </div>
+                        </li>
+
+                        <li class="featured-item">
+                            <button
+                                class="featured-row"
+                                data-featured="project-03"
+                            >
+                                <img
+                                    src="img/image_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg"
+                                    alt=""
+                                    class="featured-thumb"
+                                />
+                                <span class="featured-info">
+                                    <span class="featured-toggle"></span>
+                                    <span class="featured-title"
+                                        >project_03.md</span
+                                    >
+                                    <span class="featured-meta">'25</span>
+                                </span>
+                            </button>
+                            <div class="featured-detail">
+                                <p class="featured-desc">
+                                    プロジェクトの簡単な説明文。
+                                </p>
+                                <a href="#" class="featured-open"
+                                    >$ open project_03.md →</a
+                                >
+                            </div>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="featured-seeall">[ see all → ]</a>
+                </section>
+
+                <section class="panel contacts" data-panel="contact" hidden>
+                    <p class="panel-title">┌─ contacts ──────────────</p>
+                    <ul class="contacts-content">
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">X</a></li>
+                        <li><a href="#">mail</a></li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- PC ウィンドウを浮かべる領域(スマホでは非表示) -->
+            <div class="workspace" id="workspace"></div>
+        </main>
+
+        <footer class="pc-only">
+            <div class="footer-left">
+                <div class="footer-status">
+                    <p>
+                        <span class="status-label">UPTIME</span>
+                        <span class="status-val" id="stat-uptime"
+                            >00:00:00</span
+                        >
+                        <span class="status-sep">·</span>
+                        <span class="status-label">CPU</span>
+                        <span class="status-val" id="stat-cpu">--%</span>
+                        <span class="status-sep">·</span>
+                        <span class="status-label">MEM</span>
+                        <span class="status-val" id="stat-mem">--%</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-center">
+                <div class="footer-Copyright">
+                    <p>© 2026 seeker</p>
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <div class="footer-help">
+                    <p>
+                        HELP<span class="primary">: ?</span>　>
+                        <span class="amber">COMMANDS</span>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="js/terminal.js"></script>
+        <script src="js/nav.js"></script>
+        <script src="js/featured.js"></script>
+        <script src="js/window.js"></script>
+        <script src="js/status.js"></script>
+        <script src="js/network.js"></script>
+        <script src="js/clock.js"></script>
+        <!-- 最後に読む(他要素が揃ってから) -->
+        <script src="js/login.js"></script>
+    </body>
+</html>

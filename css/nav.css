@@ -1,0 +1,83 @@
+nav {
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-dim);
+
+    /* スマホ: 画面下に貼り付けたまま(スクロールしても下に残る) */
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+
+nav ul {
+    display: flex;
+    height: 100%;
+}
+
+nav li {
+    flex: 1;
+    display: flex;
+}
+
+nav button {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition:
+        color 0.15s,
+        background 0.15s;
+}
+
+nav button:hover {
+    color: var(--accent-cyan);
+}
+
+nav button:active {
+    background: var(--bg-pressed);
+    color: var(--accent-cyan);
+}
+
+nav li.active button {
+    color: var(--accent-cyan);
+    background: var(--bg-active);
+}
+
+nav .nav-icon {
+    font-size: 32px;
+    line-height: 1;
+}
+
+@media (min-width: 768px) {
+    nav {
+        border-top: none;
+        position: static;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    nav li {
+        flex: 0;
+        height: 48px; /* 38px → 48px */
+        align-items: center;
+    }
+
+    nav button {
+        width: 100%;
+        height: 44px; /* 32px → 44px */
+        border-radius: 2px;
+    }
+
+    nav li.active button {
+        border: 1px solid var(--border-dim);
+    }
+
+    nav .nav-icon {
+        font-size: 26px; /* 24px → 26px */
+    }
+}

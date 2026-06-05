@@ -1,0 +1,63 @@
+body {
+    font-family: var(--font-mono);
+    background-color: var(--bg-primary);
+
+    min-height: 100vh;
+    display: grid;
+
+    /* スマホ */
+    grid-template-areas:
+        "header"
+        "main"
+        "footer"
+        "nav";
+    grid-template-rows: auto 1fr auto var(--nav-height-mobile);
+}
+
+header {
+    grid-area: header;
+}
+main {
+    grid-area: main;
+}
+footer {
+    grid-area: footer;
+}
+nav {
+    grid-area: nav;
+}
+
+@media (min-width: 768px) {
+    body {
+        height: 100vh;
+        overflow: hidden; /* ページ全体のスクロールは止める */
+
+        grid-template-areas:
+            "header header"
+            "nav    main"
+            "footer footer";
+        grid-template-columns: var(--nav-width-pc) 1fr;
+        grid-template-rows: var(--header-height) 1fr var(--footer-height);
+    }
+
+    main {
+        min-height: 0;
+        overflow: auto;
+        border-left: 1px solid var(--border-dim);
+        border-top: 1px solid var(--border-dim);
+
+        /* PC ウィンドウを浮かべる workspace の基準 */
+        position: relative;
+    }
+}
+
+/* ========== 共通ユーティリティ ========== */
+.pc-only {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .pc-only {
+        display: revert;
+    }
+}

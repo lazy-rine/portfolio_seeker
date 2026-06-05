@@ -1,0 +1,73 @@
+/* ========== PC ウィンドウ(Hacknet 風) ========== */
+
+/* スマホでは使わない */
+.workspace {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    /* main 全体に重なる窓置き場。窓以外はクリックを透過し、下のターミナルを操作できる。 */
+    .workspace {
+        display: block;
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 20;
+    }
+
+    /* 1つの窓 */
+    .window {
+        position: absolute;
+        width: 340px;
+        max-height: 70%;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-surface);
+        border: 1px solid var(--accent-cyan);
+        pointer-events: auto; /* 窓自体は操作可能 */
+        /* 近未来: シアンの発光 + 浮遊感の影 */
+        box-shadow:
+            0 0 12px rgba(78, 201, 255, 0.25),
+            0 6px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    /* タイトルバー(ドラッグ用ハンドル) */
+    .window-titlebar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        background: var(--bg-elevated);
+        border-bottom: 1px solid var(--border-dim);
+        cursor: move;
+        user-select: none;
+    }
+
+    .window-title {
+        flex: 1;
+        color: var(--accent-cyan);
+        font-size: var(--fs-title);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* 閉じるボタン */
+    .window-close {
+        color: var(--text-muted);
+        padding: 0 4px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .window-close:hover {
+        color: var(--accent-amber);
+    }
+
+    /* 中身 */
+    .window-body {
+        padding: 12px;
+        overflow: auto;
+    }
+}

@@ -1,0 +1,59 @@
+:root {
+    /* ========== 背景(3段階 + インタラクション) ========== */
+    --bg-primary: #0a1520; /* ベース背景 */
+    --bg-elevated: #0c1a28; /* ヘッダ・フッタ・dock 背景 */
+    --bg-surface: #0f1f2e; /* パネル背景 */
+    --bg-active: #14283c; /* active 状態、hover、open状態 */
+    --bg-pressed: #102035; /* タップ中(モバイル) */
+
+    /* ========== テキスト(4段階) ========== */
+    --text-primary: #c8d8e8; /* 主要テキスト、項目タイトル */
+    --text-body: #a0b4c8; /* description 本文 */
+    --text-muted: #6a8aa8; /* キー名、二次情報、inactive */
+
+    /* ========== アクセント ========== */
+    --accent-cyan: #4ec9ff; /* プロンプト、active、ヒーロー */
+    --accent-amber: #ffb84d; /* new バッジ、open to work */
+    --accent-green: #17e150; /* online、[OK]マーク */
+
+    /* ========== ボーダー ========== */
+    --border-dim: #8fb2d7; /* 枠線全般、区切り線 */
+
+    /* ========== スペーシング ========== */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 24px;
+    --space-2xl: 32px;
+
+    /* ========== フォントサイズ(モバイル基準) ========== */
+    --fs-hero: 20px; /* > Hello, World. */
+    --fs-body: 14px; /* 本文 */
+    --fs-sub: 13px; /* 補助テキスト */
+    --fs-title: 12px; /* パネルタイトル、メタ情報 */
+    --fs-meta: 11px; /* バッジ、dock ラベル */
+
+    /* ========== フォントファミリー ========== */
+    --font-mono:
+        ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+    /* ========== レイアウト寸法 ========== */
+    --border-radius: 2px;
+    --transition-fast: 0.15s;
+    --transition-base: 0.3s;
+
+    --header-height: 56px;
+    --footer-height: 48px;
+    --nav-width-pc: 60px;
+    --nav-height-mobile: 72px;
+}
+
+/* PC で一部サイズを上書き(必要なら) */
+@media (min-width: 768px) {
+    :root {
+        --fs-body: 14px;
+        --fs-sub: 13px;
+        /* PC固有の調整があればここに */
+    }
+}

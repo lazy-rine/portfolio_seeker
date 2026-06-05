@@ -1,0 +1,79 @@
+/* ログイン画面(初回オーバーレイ) */
+
+/* 初回はログイン完了まで #command を隠す。完了時に JS が pre-login を外す */
+html.pre-login #command {
+    display: none;
+}
+
+/* 表示済みタブ(head のスクリプトが付与): オーバーレイ無し */
+html.login-skip #login-screen {
+    display: none;
+}
+
+.login-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9998; /* スキャンライン(9999)の下 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: var(--bg-primary);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.login-screen.login-done {
+    opacity: 0;
+    pointer-events: none; /* フェード中もクリックを透過 */
+}
+
+/* display:flex が [hidden] を打ち消すので明示的に消す */
+.login-screen[hidden] {
+    display: none;
+}
+
+.login-box {
+    width: min(520px, 88vw);
+    padding: 24px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-dim);
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
+}
+
+.login-line {
+    color: var(--text-muted);
+    line-height: 1.9;
+    white-space: nowrap;
+}
+
+.login-line .login-label {
+    color: var(--accent-cyan);
+    margin-right: 8px;
+}
+
+.login-line .ok {
+    color: var(--accent-green);
+}
+
+.login-typed {
+    color: var(--text-primary);
+}
+
+/* terminal-cursor-blink は home.css の定義を使う */
+.login-typed.typing::after {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 1em;
+    margin-left: 2px;
+    background: var(--accent-cyan);
+    vertical-align: text-bottom;
+    animation: terminal-cursor-blink 1.1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .login-screen {
+        transition: none;
+    }
+}

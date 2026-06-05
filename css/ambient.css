@@ -1,0 +1,114 @@
+/* ===== 背景: ネットワーク(描画は network.js) ===== */
+#bg-net {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    display: block;
+}
+
+/* ===== クローム: ヘッダ / フッタを一段持ち上げる ===== */
+header {
+    background: var(--bg-elevated);
+    box-shadow: inset 0 -1px 0 var(--border-dim);
+}
+
+footer {
+    background: var(--bg-elevated);
+}
+
+/* ===== 奥行き: パネル ===== */
+.panel {
+    position: relative;
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* boot 以外は上から淡い tint(boot は元の放射グラデを残す) */
+.panel:not(.boot) {
+    background:
+        linear-gradient(180deg, rgba(78, 201, 255, 0.03), transparent 45%),
+        var(--bg-surface);
+}
+
+/* ===== アクセント: 見出しの発光 ===== */
+.panel-title {
+    text-shadow: 0 0 8px rgba(78, 201, 255, 0.45);
+}
+
+/* ===== HUD: パネル四隅の cyan ブラケット ===== */
+.panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.6;
+    background:
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) left top / 12px
+            1px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) left top / 1px
+            12px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) right top / 12px
+            1px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) right top / 1px
+            12px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) left bottom /
+            12px 1px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) left bottom /
+            1px 12px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) right bottom /
+            12px 1px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) right bottom /
+            1px 12px no-repeat;
+}
+
+/* ===== 窓: 奥行き(cyan グローは残す) ===== */
+.window {
+    box-shadow:
+        0 0 12px rgba(78, 201, 255, 0.25),
+        0 10px 30px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* 窓: タイトルバーに信号ドット */
+.window-titlebar::before {
+    content: "";
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-amber);
+    box-shadow:
+        13px 0 0 var(--accent-green),
+        26px 0 0 var(--accent-cyan);
+    margin-right: 30px;
+}
+
+/* 窓: 四隅の cyan ブラケット */
+.window::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.7;
+    background:
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) left top / 12px
+            1px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) left top / 1px
+            12px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) right top / 12px
+            1px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) right top / 1px
+            12px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) left bottom /
+            12px 1px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) left bottom /
+            1px 12px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) right bottom /
+            12px 1px no-repeat,
+        linear-gradient(var(--accent-cyan), var(--accent-cyan)) right bottom /
+            1px 12px no-repeat;
+}
