@@ -5,14 +5,18 @@
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const COLOR = "78, 201, 255"; // cyan の RGB
+    // const COLOR = "78, 201, 255"; // cyan の RGB
+    const COLOR = "31, 102, 255"; // cyan の RGB
+
     const LINK_DIST = 130; // ノード同士を線で結ぶ距離
     const MOUSE_DIST = 160; // カーソルと結ぶ距離
     const SPEED = 0.15; // 1フレームの最大移動量
     const FRAME_MS = 1000 / 40; // ~40fps
 
     // マウス連動は fine pointer の端末だけ
-    const useMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const useMouse = window.matchMedia(
+        "(hover: hover) and (pointer: fine)",
+    ).matches;
 
     let nodes = [];
     let raf = null;
@@ -71,7 +75,7 @@
                 const dy = a.y - b.y;
                 const dist = Math.hypot(dx, dy);
                 if (dist < LINK_DIST) {
-                    const alpha = (1 - dist / LINK_DIST) * 0.18;
+                    const alpha = (1 - dist / LINK_DIST) * 0.9;
                     ctx.strokeStyle = "rgba(" + COLOR + "," + alpha + ")";
                     ctx.beginPath();
                     ctx.moveTo(a.x, a.y);
@@ -87,7 +91,7 @@
                 const p = nodes[i];
                 const dist = Math.hypot(p.x - mouse.x, p.y - mouse.y);
                 if (dist < MOUSE_DIST) {
-                    const alpha = (1 - dist / MOUSE_DIST) * 0.35;
+                    const alpha = (1 - dist / MOUSE_DIST) * 0.9;
                     ctx.strokeStyle = "rgba(" + COLOR + "," + alpha + ")";
                     ctx.beginPath();
                     ctx.moveTo(mouse.x, mouse.y);
